@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bin140s6inw2m"]
+
+[ext_resource type="PackedScene" uid="uid://bxwecwylfbvem" path="res://scenes/objects/enemy_ship.tscn" id="1_x5rlw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_l4bep"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_dny5r"]
+sky_material = SubResource("ProceduralSkyMaterial_l4bep")
+
+[sub_resource type="Environment" id="Environment_orek4"]
+background_mode = 2
+sky = SubResource("Sky_dny5r")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qa0f7"]
+size = Vector3(3.52307, 1, 4.22505)
+
+[node name="droptest" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_orek4")
+
+[node name="Enemy Ship" parent="." instance=ExtResource("1_x5rlw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.459569, 0, 0.321188)
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.36251, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("BoxShape3D_qa0f7")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="RigidBody3D"]
+size = Vector3(3.66845, 1, 4.33067)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.65276)
