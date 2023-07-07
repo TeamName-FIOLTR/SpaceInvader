@@ -4,6 +4,9 @@ extends Node3D
 @export var paththingig : Path3D
 @export var grid_size : Vector2 = Vector2(10,10)
 @export var alian_rows : int = 10
+
+@export var difficulty_increase_speed : float = 0.1
+
 var offset_array : Array = [0.0]
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -36,4 +39,6 @@ func _process(delta):
 		offset_array[i] += delta*alian_speed
 #	for child in paththingig.get_children(): ## yeah idk old code ig
 #		child.progress_ratio = pingpong(child.progress_ratio+delta*alian_speed, 1.0)
-	pass
+
+	if len(offset_array) > 0 and offset_array[len(offset_array)-1] > .9:
+		position.x -= difficulty_increase_speed*delta

@@ -5,6 +5,9 @@ class_name DefaultBullet
 @export 
 var deathParticles : PackedScene
 
+func _ready():
+	$AudioStreamPlayer3D.play()
+	$VisibleOnScreenNotifier3D.screen_exited.connect(queue_free)
 func die():
 	print("calling the die function")
 	var dp = deathParticles.instantiate()

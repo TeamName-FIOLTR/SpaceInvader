@@ -1,11 +1,11 @@
 [gd_scene load_steps=5 format=3 uid="uid://csmyhce5hkokj"]
 
 [ext_resource type="Script" path="res://scenes/objects/playerShip/playerShip.gd" id="1_gilvt"]
-[ext_resource type="PackedScene" uid="uid://cu3gog74fbqhq" path="res://assets/geometry/playerShip.glb" id="1_rnpti"]
+[ext_resource type="PackedScene" uid="uid://dhcyb12c4aw28" path="res://assets/geometry/playerShip.glb" id="1_rnpti"]
 [ext_resource type="PackedScene" uid="uid://ba3kg7xgccl6b" path="res://scenes/objects/bullets/defaultBullet.tscn" id="2_xfdcm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_rhjkf"]
-size = Vector3(1, 0.392528, 1)
+size = Vector3(0.435696, 0.392528, 0.30346)
 
 [node name="player" type="CharacterBody3D"]
 script = ExtResource("1_gilvt")
@@ -16,9 +16,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0592948, 0, 0)
 shape = SubResource("BoxShape3D_rhjkf")
 
 [node name="Center" type="Node3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 
 [node name="playerShip" parent="Center" instance=ExtResource("1_rnpti")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1712, -0.404794, -0.370141)
 
 [node name="fire_location" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.77233, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.377957, 0, 0)
+
+[node name="shoot_cooldown" type="Timer" parent="."]
+wait_time = 0.2

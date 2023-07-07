@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy0wxwycda4q2"]
+
+[ext_resource type="Theme" uid="uid://ot7ka2bbruvm" path="res://scenes/objects/resources/mainTheme.tres" id="1_pb052"]
+[ext_resource type="Script" path="res://scenes/UI/entrance/StartGameButton.gd" id="1_qo4rs"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_pb052")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CenterContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Space Inveaders!"
+
+[node name="Button" type="Button" parent="Panel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start Game!"
+script = ExtResource("1_qo4rs")

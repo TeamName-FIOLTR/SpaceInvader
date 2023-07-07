@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://mfixth3jcmew"]
+
+[ext_resource type="PackedScene" uid="uid://bqnwe1o0ok4fn" path="res://scenes/objects/enemygrid.tscn" id="1_kwihq"]
+[ext_resource type="PackedScene" uid="uid://csmyhce5hkokj" path="res://scenes/objects/playerShip/playerShip.tscn" id="2_rvfq4"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_517xj"]
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0.5, 0.5, 0.5, 1)
+ground_bottom_color = Color(0, 0, 0, 1)
+ground_horizon_color = Color(0.5, 0.5, 0.5, 1)
+
+[sub_resource type="Sky" id="Sky_l4chs"]
+sky_material = SubResource("ProceduralSkyMaterial_517xj")
+
+[sub_resource type="Environment" id="Environment_n7xqo"]
+background_mode = 2
+sky = SubResource("Sky_l4chs")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Node3D" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_n7xqo")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-3.79759e-08, 0.868787, -0.495186, -2.16453e-08, 0.495186, 0.868787, 1, 4.37114e-08, 1.77636e-15, 3.41977, 3.36765, 0)
+fov = 98.4375
+
+[node name="enemything" parent="." instance=ExtResource("1_kwihq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.24707, 0, 0)
+
+[node name="player" parent="." instance=ExtResource("2_rvfq4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.548, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.141176, 1, 0.870588, 1)
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.65415, 0, 0)
+light_color = Color(1, 0.552941, 0.34902, 1)

@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://ba3kg7xgccl6b"]
+[gd_scene load_steps=10 format=3 uid="uid://ba3kg7xgccl6b"]
 
 [ext_resource type="Script" path="res://scenes/objects/bullets/defaultBullet.gd" id="1_daemh"]
 [ext_resource type="PackedScene" uid="uid://bgpa7yn5xqx63" path="res://scenes/objects/misc/fireTrailParticles.tscn" id="1_yfm4f"]
 [ext_resource type="PackedScene" uid="uid://cy6gspjrm4kgl" path="res://scenes/objects/misc/splosionParts.tscn" id="2_sq5ki"]
+[ext_resource type="AudioStream" uid="uid://bsd8anwcp6s0o" path="res://assets/sounds/edited_space_lazer.wav" id="4_kdkwe"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_27iln"]
+size = Vector3(0.322756, 0.204755, 0.317766)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y05qm"]
 transparency = 1
@@ -75,23 +77,32 @@ _data = {
 }
 
 [node name="PewPews" type="CharacterBody3D"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_daemh")
 deathParticles = ExtResource("2_sq5ki")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(0.999466, 0, 0, 0, 0.999466, 0, 0, 0, 0.999466, 0.043496, -0.559108, 0.00992286)
+transform = Transform3D(0.999466, 0, 0, 0, 0.999466, 0, 0, 0, 0.999466, 0.00706914, -0.152789, 0.00992286)
 shape = SubResource("BoxShape3D_27iln")
 
 [node name="Node3D" parent="." instance=ExtResource("1_yfm4f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.647319, 0)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, -0.647319, 0)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(0.691402, 0, 0, 0, 0.203572, 0, 0, 0, 0.790173, 0, -0.187515, 0)
 material_overlay = SubResource("StandardMaterial3D_y05qm")
+size = Vector3(0.344832, 1, 0.335581)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_sqho5")
 }
+
+[node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.27037, 0)
+aabb = AABB(-0.577554, -2.00439, -0.530807, 1.15511, 4, 1.06161)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_kdkwe")

@@ -1,17 +1,26 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxwecwylfbvem"]
+[gd_scene load_steps=4 format=3 uid="uid://bxwecwylfbvem"]
 
 [ext_resource type="Script" path="res://Enemy Ship.gd" id="1_8mfgw"]
+[ext_resource type="PackedScene" uid="uid://qrtbxffot2l7" path="res://assets/geometry/enemyShip.glb" id="2_qk38e"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_kvqs1"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_77ahv"]
+size = Vector3(0.722893, 0.49973, 0.75921)
 
 [node name="Enemy Ship" type="Node3D"]
 script = ExtResource("1_8mfgw")
 
 [node name="Area3D" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 5
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-shape = SubResource("BoxShape3D_kvqs1")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.321572, 0.0501012, 0)
+shape = SubResource("BoxShape3D_77ahv")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="center" type="Node3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="enemyShip" parent="center" instance=ExtResource("2_qk38e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.855217, -0.00897598, 18.0763)
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
