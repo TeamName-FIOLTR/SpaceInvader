@@ -1,0 +1,97 @@
+[gd_scene load_steps=9 format=3 uid="uid://ba3kg7xgccl6b"]
+
+[ext_resource type="Script" path="res://scenes/objects/bullets/defaultBullet.gd" id="1_daemh"]
+[ext_resource type="PackedScene" uid="uid://bgpa7yn5xqx63" path="res://scenes/objects/misc/fireTrailParticles.tscn" id="1_yfm4f"]
+[ext_resource type="PackedScene" uid="uid://cy6gspjrm4kgl" path="res://scenes/objects/misc/splosionParts.tscn" id="2_sq5ki"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_27iln"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y05qm"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.866667)
+emission_enabled = true
+emission = Color(1, 0.498039, 0, 1)
+
+[sub_resource type="Animation" id="Animation_gm0td"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.691402, 0.203572, 0.790173)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CSGBox3D:material_overlay:emission_energy_multiplier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_cp7bp"]
+resource_name = "pulse"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CSGBox3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector3(0.691402, 0.203572, 0.790173), Vector3(0.760542, 0.219215, 0.82398), Vector3(0.829682, 0.234858, 0.857787), Vector3(0.760542, 0.219215, 0.82398), Vector3(0.691402, 0.203572, 0.790173)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CSGBox3D:material_overlay:emission_energy_multiplier")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [1.0, 0.5, 0.0, 0.5, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sqho5"]
+_data = {
+"RESET": SubResource("Animation_gm0td"),
+"pulse": SubResource("Animation_cp7bp")
+}
+
+[node name="PewPews" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_daemh")
+deathParticles = ExtResource("2_sq5ki")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.999466, 0, 0, 0, 0.999466, 0, 0, 0, 0.999466, 0.043496, -0.559108, 0.00992286)
+shape = SubResource("BoxShape3D_27iln")
+
+[node name="Node3D" parent="." instance=ExtResource("1_yfm4f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.647319, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(0.691402, 0, 0, 0, 0.203572, 0, 0, 0, 0.790173, 0, -0.187515, 0)
+material_overlay = SubResource("StandardMaterial3D_y05qm")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sqho5")
+}

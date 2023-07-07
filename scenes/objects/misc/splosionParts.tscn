@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://cy6gspjrm4kgl"]
+
+[ext_resource type="Script" path="res://scenes/objects/misc/miscScripts/splosionParts.gd" id="1_y2s5n"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r6anv"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0, 0, 1)
+
+[sub_resource type="Curve" id="Curve_cdv3o"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_prvg0"]
+curve = SubResource("Curve_cdv3o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_76abf"]
+direction = Vector3(0, 1, 0)
+gravity = Vector3(0, -50, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 15.0
+scale_min = 0.5
+scale_curve = SubResource("CurveTexture_prvg0")
+
+[sub_resource type="BoxMesh" id="BoxMesh_c1tdd"]
+
+[node name="explosionParticles" type="GPUParticles3D"]
+material_overlay = SubResource("StandardMaterial3D_r6anv")
+lifetime = 0.5
+explosiveness = 0.85
+process_material = SubResource("ParticleProcessMaterial_76abf")
+draw_pass_1 = SubResource("BoxMesh_c1tdd")
+script = ExtResource("1_y2s5n")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

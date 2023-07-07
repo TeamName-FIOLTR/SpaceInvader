@@ -1,0 +1,59 @@
+[gd_scene load_steps=12 format=3 uid="uid://bgpa7yn5xqx63"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ij4c4"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x1ir8"]
+albedo_color = Color(1, 0, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.517647, 0, 1)
+
+[sub_resource type="Gradient" id="Gradient_nl2qk"]
+offsets = PackedFloat32Array(0, 0.5, 0.946701)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.616667, 0, 1, 1, 0.820833, 0.75, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_044yx"]
+gradient = SubResource("Gradient_nl2qk")
+
+[sub_resource type="Gradient" id="Gradient_w830g"]
+offsets = PackedFloat32Array(0, 0.571066, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.613198, 0, 1, 1, 0.976, 0.88, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gnyjr"]
+gradient = SubResource("Gradient_w830g")
+
+[sub_resource type="Curve" id="Curve_kmjia"]
+max_value = 0.64
+_data = [Vector2(0, 0.680982), 0.0, 0.0, 0, 0, Vector2(0.214912, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.214724), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_xk8q5"]
+curve = SubResource("Curve_kmjia")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7lofc"]
+emission_shape = 1
+emission_sphere_radius = 0.47
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_xk8q5")
+color = Color(1, 0.0901961, 0.0901961, 1)
+color_ramp = SubResource("GradientTexture1D_gnyjr")
+color_initial_ramp = SubResource("GradientTexture1D_044yx")
+
+[sub_resource type="BoxMesh" id="BoxMesh_641yf"]
+
+[sub_resource type="Skin" id="Skin_rye2h"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_ij4c4")
+material_overlay = SubResource("StandardMaterial3D_x1ir8")
+transparency = 0.4
+lifetime = 3.0
+speed_scale = 4.0
+collision_base_size = 0.0
+visibility_aabb = AABB(-3.64696, -4, -4, 7.29392, 8, 8)
+process_material = SubResource("ParticleProcessMaterial_7lofc")
+draw_pass_1 = SubResource("BoxMesh_641yf")
+draw_skin = SubResource("Skin_rye2h")
